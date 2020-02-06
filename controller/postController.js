@@ -11,3 +11,12 @@ exports.addPost = async function (req,res) {
     res.status(500).end(err);
   }
 }
+
+exports.getPostByUserId =  async function (req, res) {
+  try {
+    const posts = await postModel.find({ userid: req.id }, { userid: 0});
+    res.send(posts);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+}
