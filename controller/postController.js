@@ -2,7 +2,6 @@ const postModel = require('../model/postModel');
 
 exports.addPost = async function (req,res) {
   const createPost = new postModel(req.body);
-  console.log(res.locals.id, ".......")
   createPost.userid = req.id;
   try {
     const ans = await createPost.save();
@@ -28,7 +27,3 @@ exports.getPost =  async function (req, res) {
   
 }
 
-exports.getAllUser = async function (req, res) {
-  console.log(req.role,"vhjjvh")
-  
-}
