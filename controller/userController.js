@@ -13,7 +13,7 @@ exports.login = async function(req, res) {
   User.findOne({ email: req.body.email, password: req.body.password }, function (err, User) {
   if (err) return res.status(500).send('Error on the server.');
   if (!User) return res.status(404).send('No user found.');
-  const token = jwt.sign({ id: User.id }, config.secret);
+  const token = jwt.sign({ id: User.id, role: User.role }, config.secret);
   res.status(200).send({ auth: true, token: token });
 });
 };

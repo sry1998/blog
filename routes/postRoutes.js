@@ -5,6 +5,6 @@ const postRouter = express.Router();
 
 postRouter.post('/post',  middleware.verifyToken, postController.addPost);
 
-postRouter.get('/post', middleware.verifyToken, postController.getPostByUserId);
+postRouter.get('/post', middleware.verifyToken, postController.getPost);
 
 module.exports = postRouter;

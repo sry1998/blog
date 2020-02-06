@@ -12,11 +12,23 @@ exports.addPost = async function (req,res) {
   }
 }
 
-exports.getPostByUserId =  async function (req, res) {
+exports.getPost =  async function (req, res) {
   try {
-    const posts = await postModel.find({ userid: req.id }, { userid: 0});
-    res.send(posts);
+    if(req.role == "Admin") {
+      const posts = await postModel.find();
+      res.send(posts);
+    }
+    else {
+      const posts = await postModel.find({ userid: req.id }, { userid: 0});
+      res.send(posts);
+    }
   } catch (err) {
-    res.status(500).send(err);
+      res.status(500).send(err);
   }
+  
+}
+
+exports.getAllUser = async function (req, res) {
+  console.log(req.role,"vhjjvh")
+  
 }
