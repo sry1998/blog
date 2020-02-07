@@ -1,6 +1,6 @@
 const postModel = require('../model/postModel');
 
-exports.addPost = async function (req,res) {
+exports.addPost = async function (req, res) {
   const createPost = new postModel(req.body);
   createPost.userid = req.id;
   try {
@@ -11,19 +11,23 @@ exports.addPost = async function (req,res) {
   }
 }
 
-exports.getPost =  async function (req, res) {
+exports.getPost = async function (req, res) {
   try {
-    if(req.role == "Admin") {
+    if (req.role === "Admin") {
       const posts = await postModel.find();
       res.send(posts);
     }
     else {
-      const posts = await postModel.find({ userid: req.id }, { userid: 0});
+      const posts = await postModel.find({ userid: req.id }, { userid: 0 });
       res.send(posts);
     }
   } catch (err) {
-      res.status(500).send(err);
+    res.status(500).send(err);
   }
-  
 }
+
+exports.getDashboard = function (req, res) {
+  res.render('dashboard', {name:req.name});
+}
+
 

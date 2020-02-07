@@ -6,7 +6,11 @@ const router = express.Router();
 
 router.post('/register',  userController.register);
 
+router.get('/login', userController.getLogin);
+
 router.post('/login', userController.login);
+
+router.get('/dash', middleware.verifyToken,  postController.getDashboard);
 
 router.post('/post',  middleware.verifyToken, postController.addPost);
 

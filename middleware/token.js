@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 
 exports.verifyToken = function(req, res, next) {
-  const token = req.headers.authorization;
+  console.log(req.cookies.token);
+  const token = req.cookies.token;
   if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
   jwt.verify(token, config.secret, async function (err, decoded) {
@@ -10,6 +11,7 @@ exports.verifyToken = function(req, res, next) {
     else {
       req.id = decoded.id;
       req.role = decoded.role;
+      req.name = decoded.name;
       /* res.locals.custom = true;
       res.locals.id = decoded.id */
       next();
